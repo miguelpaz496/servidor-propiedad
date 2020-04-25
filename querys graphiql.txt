@@ -1,0 +1,221 @@
+query ($email: String!, $password: String!) 
+     {
+      login(email:$email, password:$password) {
+        
+        name
+        last_name
+        email
+        dni
+        telefono
+        password
+        active
+        tipo_usuario
+      }
+    }
+
+query ($dni: String!) { 
+      getUser(dni:$dni) {        
+        name
+        last_name
+        email
+        dni
+        telefono
+        password
+        active
+        tipo_usuario
+      }
+    }
+
+
+
+query getUserWithFragments($email1: String!, $email2: String!) {
+      user1: user(email: $email1) {
+             ...userFields
+      },
+      user2: user(email: $email2) {
+            ...userFields
+      } 
+}
+    
+fragment userFields on User {
+  	id
+  	name
+    last_name
+    email
+    dni
+    telefono
+    password
+    active
+    tipo_usuario
+}
+
+------------------------------------------------------------------------
+MUTATIONS
+ Variables:
+
+{  
+  "name": "Luis Miguel",
+  "last_name": "Paz",
+  "email": "luismiguelpaz96@gmail.com",
+  "dni": "1996",
+  "telefono": "celular :)",
+  "password": "1996",
+  "active": true,
+  "tipo_usuario": 2
+}
+---------------------------------------------
+
+mutation ($name: String!, $last_name: String!, $email: String!, $dni: String!, $telefono: String!, $password: String, $active: Boolean, $tipo_usuario: Int!) 
+{ 
+      createUser(name: $name, last_name: $last_name, email: $email, dni: $dni, telefono: $telefono, password: $password, active: $active, tipo_usuario: $tipo_usuario) 
+  
+    }
+--------------------------------------------
+
+mutation updateUserActive($email: String!, $active: Boolean!) {
+  updateUserActive(email: $email, active: $active) {
+    ... userFields
+  }
+}
+    
+fragment userFields on User {
+    id
+    name
+    last_name
+    email
+    dni
+    telefono
+    password
+    active
+    tipo_usuario
+}
+
+
+
+-------------------------------------------------------------
+TIPO USUARIO
+--------------------------------------------------------------
+mutation updateTipoUsuario($id: ID!, $tipo_usuarios: String) {
+  updateTipoUsuario(id: $id, tipo_usuarios: $tipo_usuarios) 
+}
+
+
+
+
+----------------------------------------------------------------
+UNIDADES
+----------------------------------------------------------------
+
+query ($id: ID!) 
+     {
+      getUnidad(id:$id) {
+        
+        nombre
+        direccion
+        telefono
+        id_admin
+        active
+      }
+    }
+
+
+------------------------------------------------------------------------
+
+
+  mutation ($nombre: String, $direccion: String, $telefono: String, $id_admin: Int, $active: Boolean) {
+     
+       createUnidad(nombre: $nombre, direccion: $direccion, telefono: $telefono, id_admin: $id_admin, active: $active)
+  
+
+   }
+
+--------------------------------------------------------------------------
+
+mutation ($id: ID!, $nombre: String, $direccion: String, $telefono: String, $id_admin: Int, $active: Boolean) {
+     
+       updateUnidad(id: $id, nombre: $nombre, direccion: $direccion, telefono: $telefono, id_admin: $id_admin, active: $active)
+  
+
+}
+
+-------------------------------------------------------------------------
+
+
+APTOS
+-------------------------------------------------------------------------------
+
+query  ($id: ID!){
+     
+       getApto(id: $id){
+        id
+        nomenclatura
+        id_unidad
+        id_bloque
+        id_tipo_apto
+        id_propietario
+        id_arrendatario
+  }  
+
+}
+
+-----------------------------------------------------------------------------
+{
+  "id": 2,
+  "nomenclatura": "casa 6",
+  "id_unidad": 3,
+  "id_bloque": 5,
+  "id_tipo_apto": 3,
+  "id_propietario": 1,
+  "id_arrendatario": 7
+}
+
+----------------------------------------------------------------------------------
+
+mutation ($nomenclatura: String, $id_unidad: Int, $id_bloque: Int, $id_tipo_apto: Int, $id_propietario: Int, $id_arrendatario: Int) {
+     
+       createApto(nomenclatura: $nomenclatura, id_unidad: $id_unidad, id_bloque: $id_bloque, id_tipo_apto: $id_tipo_apto, id_propietario: $id_propietario, id_arrendatario: $id_arrendatario)
+  
+
+}
+
+-------------------------------------------------------------------------------
+
+mutation ($id: ID!, $nomenclatura: String, $id_unidad: Int, $id_bloque: Int, $id_tipo_apto: Int, $id_propietario: Int, $id_arrendatario: Int) {
+     
+       updateApto(id: $id, nomenclatura: $nomenclatura, id_unidad: $id_unidad, id_bloque: $id_bloque, id_tipo_apto: $id_tipo_apto, id_propietario: $id_propietario, id_arrendatario: $id_arrendatario)
+  
+
+}
+
+
+---------------------------------------------------------------------------------
+TIPO APTOS
+-----------------------------------------------------------------------------------
+query  {     
+       getTipoAptos{
+        id
+        tipo_apto
+        cobro
+        vigencia
+        metros
+        id_unidad
+  }  
+
+}
+
+---------------------------------------------------------------------------------
+
+query ($id_unidad: Int!) {     
+       getTipoAptosUnidad(id_unidad:$id_unidad){
+        id
+        tipo_apto
+        cobro
+        vigencia
+        metros
+        id_unidad
+  }  
+
+}
+
+
+--------------------------------------------------------------------------------
