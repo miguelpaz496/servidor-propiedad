@@ -4,7 +4,7 @@
   "description": "User consolidation apis",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/index.js --exec babel-node"
   },
   "author": "",
   "license": "ISC",
@@ -15,7 +15,15 @@
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
     "graphql": "^14.6.0",
+    "graphql-yoga": "^1.18.3",
     "mongodb": "^3.3.0-beta2",
     "mysql": "^2.17.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.5",
+    "nodemon": "^2.0.3"
   }
 }
