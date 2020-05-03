@@ -10,8 +10,10 @@ type User {
   dni: String!
   telefono: String!
   password: String!
-  active: Boolean!
-  tipo_usuario: Int!
+  active: Boolean!  
+  id_admin: Int
+  id_tipo_usuario: Int!
+  tipo_usuario: String!
 }
 type Tipo_usuario {
     id: ID!
@@ -23,14 +25,33 @@ type Tipo_usuario {
     nombre: String!
     direccion: String!
     telefono: String!
-    id_admin: Int!
     active: Boolean!
+
+    id_admin: Int!
+    name_admin: String!
+    last_name_admin: String!
+    email_admin: String!
+    dni_admin: String!
+    tel_admin: String!    
   }
 
   type Bloque {
     id: ID!
-    nombre: String!
-    id_unidad: Int!    
+    bloque: String!
+    id_unidad: Int!
+    
+    unidad: String!
+    direccion: String!
+    telefono: String!
+    active_unid: Boolean!
+    id_admin: Int!
+
+    name_admin: String
+    last_name_admin: String!
+    email_admin: String!
+    dni_admin: String!
+    tel_admin: String!
+
   }
 
   type Apto {
@@ -41,6 +62,25 @@ type Tipo_usuario {
     id_tipo_apto: Int!
     id_propietario: Int!
     id_arrendatario: Int!
+
+    unidad: String!
+    direccion: String!
+    telefono: String!
+    id_admin: Int!
+    active_unid: Boolean!
+
+    name: String!
+    last_name: String!
+    email: String!
+    dni: String!
+    tel: String!
+
+    bloque: String!
+    tipo_apto: String
+    cobro: Float
+    vigencia: Int
+    metros: Int
+
   }
 
   type TipoApto {
@@ -62,7 +102,7 @@ type Query {
      
   getUnidades: [Unidad!]!,
   getUnidad(id: ID) : Unidad!,
-  getUnidadesAdmin(id_admin: Int) : [Unidad!]!
+  getUnidadesAdmin(dni: String!) : [Unidad!]!
      
   getBloques: [Bloque!]!,
   getBloque(id: ID!) : Bloque!
@@ -70,7 +110,11 @@ type Query {
       
   getAptos: [Apto!]!,
   getApto(id: ID!) : Apto!
-  getAptosBloque: [Apto!]!,
+  getAptosBloque: [Apto],
+  getAptosTipo(id_tipo_apto: Int!): [Apto],
+  getAptosPropietario(id_propietario: Int!): [Apto],
+  getAptosArrendatario(id_arrendatario: Int!): [Apto],
+
       
   getTipoAptos: [TipoApto!]!,
   getTipoApto(id: ID!) : TipoApto!
