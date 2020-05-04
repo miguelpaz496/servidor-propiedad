@@ -26,9 +26,9 @@ export const resolvers = {
         deleteTipoUsuario: (args, req) => queryDB(req, "delete from tipo_usuarios where id = ?", [args.id]).then(data => data),
 
         //UNIDADES -------------------------------------------------------------------------------------------------
-        getUnidades: (args, req) => queryDB(req, "select un.id, un.nombre,un.direccion,un.telefono,un.id_admin,un.active, u.name as name_admin, u.last_name as last_name_admin, u.email as email_admin, u.dni as dni_admin,u.telefono as tel_admin from unidades un INNER JOIN users u ON un.id_admin = u.id").then(data => data),
-        getUnidad: (args, req) => queryDB(req, "select un.id, un.nombre,un.direccion,un.telefono,un.id_admin,un.active, u.name as name_admin, u.last_name as last_name_admin, u.email as email_admin, u.dni as dni_admin,u.telefono as tel_admin from unidades un INNER JOIN users u ON un.id_admin = u.id where u.id = ?", [args.id]).then(data => data[0]),
-        getUnidadesAdmin: (args, req) => queryDB(req, "select un.id, un.nombre,un.direccion,un.telefono,un.id_admin,un.active, u.name as name_admin, u.last_name as last_name_admin, u.email as email_admin, u.dni as dni_admin,u.telefono as tel_admin from unidades un INNER JOIN users u ON un.id_admin = u.id where u.dni = ?", [args.dni]).then(data => data),
+        getUnidades: (args, req) => queryDB(req, "select un.id, un.nombre,un.direccion,un.telefono,un.id_admin,un.active, u.name, u.last_name, u.email, u.dni,u.tel from unidades un INNER JOIN users u ON un.id_admin = u.id").then(data => data),
+        getUnidad: (args, req) => queryDB(req, "select un.id, un.nombre,un.direccion,un.telefono,un.id_admin,un.active, u.name, u.last_name, u.email, u.dni,u.tel from unidades un INNER JOIN users u ON un.id_admin = u.id where u.id = ?", [args.id]).then(data => data[0]),
+        getUnidadesAdmin: (args, req) => queryDB(req, "select un.id, un.nombre,un.direccion,un.telefono,un.id_admin,un.active, u.name, u.last_name, u.email, u.dni,u.tel from unidades un INNER JOIN users u ON un.id_admin = u.id where u.dni = ?", [args.dni]).then(data => data),
       
         updateUnidad: (args, req) => queryDB(req, "update unidades SET ? where id = ?", [args, args.id]).then(data => data),
         createUnidad: (args, req) => queryDB(req, "insert into unidades SET ?", args).then(data => data),
@@ -36,9 +36,9 @@ export const resolvers = {
 
         //BLOQUES----------------------------------------------------------------------------------------------------------
                 
-        getBloques: (args, req) => queryDB(req, "select b.id, b.nombre as bloque, b.id_unidad,un.nombre as unidad,un.direccion as direccion,un.telefono as telefono,un.active as active_unid,un.id_admin,u.name as name_admin,u.last_name as last_name_admin,u.email as email_admin,u.dni as dni_admin,u.telefono as tel_admin  from bloques b INNER JOIN unidades un ON b.id_unidad = un.id INNER JOIN users u ON un.id_admin = u.id").then(data => data),  
-        getBloque: (args, req) => queryDB(req, "select b.id,b.nombre as bloque,b.id_unidad,un.nombre as unidad,un.direccion as direccion,un.telefono as telefono,un.active as active_unid,un.id_admin,u.name as name_admin,u.last_name as last_name_admin,u.email as email_admin,u.dni as dni_admin,u.telefono as tel_admin  from bloques b INNER JOIN unidades un ON b.id_unidad = un.id INNER JOIN users u ON un.id_admin = u.id WHERE b.id = ?", [args.id]).then(data => data[0]),
-        getBloquesUnidad: (args, req) => queryDB(req, "select b.id,b.nombre as bloque,b.id_unidad,un.nombre as unidad,un.direccion as direccion,un.telefono as telefono,un.active as active_unid,un.id_admin,u.name as name_admin,u.last_name as last_name_admin,u.email as email_admin,u.dni as dni_admin,u.telefono as tel_admin  from bloques b INNER JOIN unidades un ON b.id_unidad = un.id INNER JOIN users u ON un.id_admin = u.id WHERE un.id = ?", [args.id_unidad]).then(data => data),
+        getBloques: (args, req) => queryDB(req, "select b.id, b.nombre as bloque, b.id_unidad,un.nombre as unidad,un.direccion as direccion,un.telefono as telefono,un.active as active_unid,un.id_admin,u.name,u.last_name,u.email,u.dni,u.tel  from bloques b INNER JOIN unidades un ON b.id_unidad = un.id INNER JOIN users u ON un.id_admin = u.id").then(data => data),  
+        getBloque: (args, req) => queryDB(req, "select b.id,b.nombre as bloque,b.id_unidad,un.nombre as unidad,un.direccion as direccion,un.telefono as telefono,un.active as active_unid,un.id_admin,u.name,u.last_name,u.email,u.dni,u.tel  from bloques b INNER JOIN unidades un ON b.id_unidad = un.id INNER JOIN users u ON un.id_admin = u.id WHERE b.id = ?", [args.id]).then(data => data[0]),
+        getBloquesUnidad: (args, req) => queryDB(req, "select b.id,b.nombre as bloque,b.id_unidad,un.nombre as unidad,un.direccion as direccion,un.telefono as telefono,un.active as active_unid,un.id_admin,u.name,u.last_name,u.email,u.dni,u.tel  from bloques b INNER JOIN unidades un ON b.id_unidad = un.id INNER JOIN users u ON un.id_admin = u.id WHERE un.id = ?", [args.id_unidad]).then(data => data),
        // getBloques: (args, req) => queryDB(req, "select b.id, b.nombre as bloque, b.id_unidad bloques b").then(data => data),  
         //getBloque: (args, req) => queryDB(req, "select b.id,b.nombre as bloque,b.id_unidad from bloques b  WHERE b.id = ?", [args.id]).then(data => data[0]),
         //getBloquesUnidad: (args, req) => queryDB(req, "select b.id,b.nombre as bloque,b.id_unidad from bloques b WHERE b.id_unidad = ?", [args.id_unidad]).then(data => data),
@@ -62,9 +62,9 @@ export const resolvers = {
 
         //TIPO APTOS ------------------------------------------------------------------------------------------------------------
         
-        getTipoAptos: (args, req) => queryDB(req, "SELECT * FROM tipo_aptos").then(data => data),
-        getTipoApto: (args, req) => queryDB(req, "SELECT * FROM tipo_aptos WHERE id = ?", [args.id]).then(data => data[0]),
-        getTipoAptosUnidad: (args, req) => queryDB(req, "SELECT * FROM tipo_aptos WHERE id_unidad = ?", [args.id_unidad]).then(data => data),
+        getTipoAptos: (args, req) => queryDB(req, "SELECT ta.id,ta.tipo_apto,ta.cobro,ta.vigencia,ta.metros,ta.id_unidad,un.nombre as unidad,un.direccion,un.telefono,un.id_admin,un.active as active_unid,u.name,u.last_name,u.email,u.email,u.dni,u.dni,u.telefono as tel,u.active active_admin FROM tipo_aptos ta INNER JOIN unidades un ON ta.id_unidad=un.id INNER JOIN users u ON un.id_admin=u.id").then(data => data),
+        getTipoApto: (args, req) => queryDB(req, "SELECT ta.id,ta.tipo_apto,ta.cobro,ta.vigencia,ta.metros,ta.id_unidad,un.nombre as unidad,un.direccion,un.telefono,un.id_admin,un.active as active_unid,u.name,u.last_name,u.email,u.email,u.dni,u.dni,u.telefono as tel,u.active active_admin FROM tipo_aptos ta INNER JOIN unidades un ON ta.id_unidad=un.id INNER JOIN users u ON un.id_admin=u.id WHERE ta.id = ?", [args.id]).then(data => data[0]),
+        getTipoAptosUnidad: (args, req) => queryDB(req, "SELECT ta.id,ta.tipo_apto,ta.cobro,ta.vigencia,ta.metros,ta.id_unidad,un.nombre as unidad,un.direccion,un.telefono,un.id_admin,un.active as active_unid,u.name,u.last_name,u.email,u.email,u.dni,u.dni,u.telefono as tel,u.active active_admin FROM tipo_aptos ta INNER JOIN unidades un ON ta.id_unidad=un.id INNER JOIN users u ON un.id_admin=u.id WHERE ta.id_unidad = ?", [args.id_unidad]).then(data => data),
 
         updateTipoApto: (args, req) => queryDB(req, "update tipo_aptos SET ? WHERE id = ?", [args, args.id]).then(data => data),
         createTipoApto: (args, req) => queryDB(req, "insert into tipo_aptos SET ?", args).then(data => data),

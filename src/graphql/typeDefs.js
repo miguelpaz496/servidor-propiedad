@@ -28,11 +28,11 @@ type Tipo_usuario {
     active: Boolean!
 
     id_admin: Int!
-    name_admin: String!
-    last_name_admin: String!
-    email_admin: String!
-    dni_admin: String!
-    tel_admin: String!    
+    name: String!
+    last_name: String!
+    email: String!
+    dni: String!
+    tel: String!    
   }
 
   type Bloque {
@@ -46,11 +46,11 @@ type Tipo_usuario {
     active_unid: Boolean!
     id_admin: Int!
 
-    name_admin: String
-    last_name_admin: String!
-    email_admin: String!
-    dni_admin: String!
-    tel_admin: String!
+    name: String
+    last_name: String!
+    email: String!
+    dni: String!
+    tel: String!
 
   }
 
@@ -90,6 +90,19 @@ type Tipo_usuario {
     vigencia: Int!
     metros: Int!
     id_unidad: Int!
+
+    unidad: String!
+    direccion: String!
+    telefono: String!
+    id_admin: Int!
+    active_unid: Boolean!
+
+    name: String!
+    last_name: String!
+    email: String!
+    dni: String!
+    tel: String!
+    active_admin: Boolean!
   }
 
 
