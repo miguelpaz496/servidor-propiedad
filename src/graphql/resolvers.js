@@ -51,7 +51,7 @@ export const resolvers = {
         }),
 
         //UNIDADES -------------------------------------------------------------------------------------------------
-        getUnidades: (args, req) => queryDB(req, "select un.id, un.nombre,un.direccion,un.telefono,un.id_admin,un.active, u.name, u.last_name, u.email, u.dni,u.tel from unidades un INNER JOIN users u ON un.id_admin = u.id").then(data => data),
+        getUnidades: (args, req) => queryDB(req, "select un.id, un.nombre,un.direccion,un.telefono,un.id_admin,un.active, u.name, u.last_name, u.email, u.dni,u.telefono from unidades un INNER JOIN users u ON un.id_admin = u.id").then(data => data),
         getUnidad: (args, req) => queryDB(req, "select un.id, un.nombre,un.direccion,un.telefono,un.id_admin,un.active, u.name, u.last_name, u.email, u.dni,u.tel from unidades un INNER JOIN users u ON un.id_admin = u.id where u.id = ?", [args.id]).then(data => data[0]),
         getUnidadesAdmin: (args, req) => queryDB(req, "select un.id, un.nombre,un.direccion,un.telefono,un.id_admin,un.active, u.name, u.last_name, u.email, u.dni,u.tel from unidades un INNER JOIN users u ON un.id_admin = u.id where u.dni = ?", [args.dni]).then(data => data),
       
